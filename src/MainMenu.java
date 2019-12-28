@@ -66,4 +66,24 @@ public class MainMenu {
             String command = scanner.nextLine();
             return command;
         }
+
+        public static Brigade brigadeCreation() {
+
+            Brigade newBrigade = new Brigade();
+            System.out.println("Please set type of brigade (PRS/KRS)");
+            Scanner scanner1 = new Scanner(System.in);
+            String typeFromConsole = scanner1.nextLine();
+            if (typeFromConsole.equals("PRS")) {
+                PrsBrigade prs = new PrsBrigade();
+                System.out.println("PRS brigade is created.");
+                newBrigade = prs;
+            } else if (typeFromConsole.equals("KRS")) {
+                KrsBrigade krs = new KrsBrigade();
+                System.out.println("KRS brigade is created.");
+            } else {
+                System.out.println("Wrong type. Try again!");
+                brigadeCreation();
+            }
+            return newBrigade;
+        }
 }
