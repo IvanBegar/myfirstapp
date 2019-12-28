@@ -1,2 +1,3 @@
-# com.bebex
+# myfirstapp
+My first "Brigade managment" app.
  
