@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="648eb56a-9aec-4d1a-8ed1-ba7e5c1d366b" name="Default Changelist" comment="first commit">
+    <list default="true" id="648eb56a-9aec-4d1a-8ed1-ba7e5c1d366b" name="Default Changelist" comment="second commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.bebex/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/com.bebex/MainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.bebex/Trash.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/com.bebex/Trash.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Trash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Trash.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -31,6 +35,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
@@ -100,6 +107,15 @@
       <workItem from="1577454063749" duration="1159000" />
       <workItem from="1577462568030" duration="7386000" />
       <workItem from="1577523231709" duration="2971000" />
+      <workItem from="1577533017941" duration="686000" />
+      <workItem from="1577535391411" duration="786000" />
+      <workItem from="1577550362112" duration="84000" />
+      <workItem from="1577638638475" duration="3563000" />
+      <workItem from="1577967334530" duration="647000" />
+      <workItem from="1578068054204" duration="1347000" />
+      <workItem from="1578133262906" duration="57000" />
+      <workItem from="1578222947719" duration="642000" />
+      <workItem from="1578239954656" duration="12000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1577532633513</created>
@@ -115,7 +131,21 @@
       <option name="project" value="LOCAL" />
       <updated>1577532716588</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="second commit">
+      <created>1577533060617</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1577533060617</updated>
+    </task>
+    <task id="LOCAL-00004" summary="second commit">
+      <created>1577533098350</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1577533098350</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,7 +156,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -134,6 +166,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="second commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="second commit" />
   </component>
 </project>

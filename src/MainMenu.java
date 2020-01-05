@@ -86,4 +86,6 @@ public class MainMenu {
             }
             return newBrigade;
         }
+
+
 }
