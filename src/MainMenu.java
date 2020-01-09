@@ -46,6 +46,7 @@ public class MainMenu {
                     for (Brigade br : brigades) {
                         System.out.println(br.toString());
                     }
+                    System.out.println("You returned to main menu.");
                     break;
                 case "Add":
                     Brigade newBrigade = brigadeCreation();
@@ -64,6 +65,7 @@ public class MainMenu {
                         System.out.print("\nWhat brigade you want to remove: ");
                         brigades.remove(getIndexForRemoveBrigade());
                     }
+                    System.out.println("You returned to main menu.");
                     break;
                 case "Exit":
                     exit = true;

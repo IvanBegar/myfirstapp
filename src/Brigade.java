@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * @author Ivan Begar
  */
@@ -7,6 +9,7 @@ public class Brigade {
     private int brigadeNumber;
     private String nameOfBrigadeMaster;
     private String typeOfPA;
+
     private String typeOfBrigade;
 
     public void setTypeOfBrigade(String typeOfBrigade) {
@@ -51,6 +54,22 @@ public class Brigade {
                 ", name of brigade master = '" + nameOfBrigadeMaster + '\'' +
                 ", type of PA = '" + typeOfPA + '\'' +
                 ", type of brigade = '" + typeOfBrigade + '\'';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Brigade brigade = (Brigade) o;
+        return brigadeNumber == brigade.brigadeNumber &&
+                nameOfBrigadeMaster.equals(brigade.nameOfBrigadeMaster) &&
+                typeOfPA.equals(brigade.typeOfPA) &&
+                typeOfBrigade.equals(brigade.typeOfBrigade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brigadeNumber, nameOfBrigadeMaster, typeOfPA, typeOfBrigade);
     }
 }
 
