@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ServiceCompany {
 
-    public static List<Brigade> brigades;
+    private static List<Brigade> brigades;
 
     public ServiceCompany(List<Brigade> brigades) {
         this.brigades = brigades;
