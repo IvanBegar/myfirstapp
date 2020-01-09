@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -33,10 +35,17 @@ public class MainMenu {
     }
 
         private void performCommand(String command) {
+            List<Brigade> brigades = new ArrayList<>();
             switch (command) {
                 case "List":
+                    for (Brigade br : brigades) {
+                        System.out.println(br.toString());
+                    }
                     break;
                 case "Add":
+                    Brigade newBrigade = brigadeCreation();
+                    brigades.add(newBrigade);
+                    System.out.println("You returned to main menu. Please enter the command: ");
                     break;
                 case "Remove":
                     break;
@@ -60,30 +69,42 @@ public class MainMenu {
             System.out.println("4. 'Exit'");
         }
 
-        private String getCommandFromUser () {
-            System.out.println("\nEnter a command:");
+        public String getCommandFromUser () {
+            System.out.println("\nEnter here:");
             Scanner scanner = new Scanner(System.in);
             String command = scanner.nextLine();
             return command;
         }
 
-        public static Brigade brigadeCreation() {
+        public int getBrigadeNumberFromUser() {
+        Scanner sc = new Scanner(System.in);
+        while (!sc.hasNextInt()) sc.next();
+        int num = sc.nextInt();
+        if (num < 0) {
+            System.out.println("Number can't be negative. Try again: ");
+            getBrigadeNumberFromUser();
+        }
+        return num;
+    }
 
+        public Brigade brigadeCreation() {
             Brigade newBrigade = new Brigade();
-            System.out.println("Please set type of brigade (PRS/KRS)");
-            Scanner scanner1 = new Scanner(System.in);
-            String typeFromConsole = scanner1.nextLine();
-            if (typeFromConsole.equals("PRS")) {
-                PrsBrigade prs = new PrsBrigade();
-                System.out.println("PRS brigade is created.");
-                newBrigade = prs;
-            } else if (typeFromConsole.equals("KRS")) {
-                KrsBrigade krs = new KrsBrigade();
-                System.out.println("KRS brigade is created.");
+            System.out.println("\nPlease set type of brigade (PRS/KRS):");
+            String typeOfBrigadeFromUser = getCommandFromUser();
+            if (typeOfBrigadeFromUser.equals("PRS") || typeOfBrigadeFromUser.equals("KRS")) {
+                newBrigade.setTypeOfBrigade(typeOfBrigadeFromUser);
             } else {
-                System.out.println("Wrong type. Try again!");
+                System.out.println("\nWrong type. Try again.");
                 brigadeCreation();
             }
+            System.out.println("\nPlease set brigade number: ");
+            int brigadeNumberFromUser = getBrigadeNumberFromUser();
+            newBrigade.setBrigadeNumber(brigadeNumberFromUser);
+            System.out.println("\nPlease set name of brigade's master: ");
+            String mastersNameFromUser = getCommandFromUser();
+            newBrigade.setNameOfBrigadeMaster(mastersNameFromUser);
+            System.out.println("\nYou create new brigade successfully: ");
+            System.out.println(newBrigade.toString());
             return newBrigade;
         }
 
