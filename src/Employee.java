@@ -42,14 +42,29 @@ public class Employee implements Serializable {
                     System.out.println("Brigade already have a master. Try to add another employee.");
                 }
             } else if (position.equals("Machinist")) {
-                this.position = position;
-                this.salary = 20000;
+                if (onlyOneMachinist == 0) {
+                    this.position = position;
+                    this.salary = 20000;
+                onlyOneMachinist++;
+                } else {
+                    System.out.println("Brigade already have a machinist. Try to add another employee.");
+                }
             } else if (position.equals("Driller")) {
-                this.position = position;
-                this.salary = 35000;
+                if (onlyTwoDrillers < 2) {
+                    this.position = position;
+                    this.salary = 35000;
+                    onlyTwoDrillers++;
+                } else {
+                    System.out.println("Brigade already have two drillers`s. Try to add another employee.");
+                }
             } else if (position.equals("Helper")) {
-                this.position = position;
-                this.salary = 20000;
+                if (onlyFourHelper < 4) {
+                    this.position = position;
+                    this.salary = 20000;
+                    onlyFourHelper++;
+                } else {
+                    System.out.println("Brigade already have four helper`s. Try to add another employee.");
+                }
             } else {
                 this.position = position;
             }

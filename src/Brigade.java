@@ -42,7 +42,7 @@ public class Brigade implements Serializable {
             this.typeOfBrigade = typeOfBrigade;
             this.typeOfPA = "UPA-60/80";
         } else {
-            this.typeOfBrigade = typeOfBrigade;
+            System.out.println("\nWrong type. Try again.");
         }
     }
 
