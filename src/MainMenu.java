@@ -170,9 +170,7 @@ public class MainMenu {
         public static void readFile() throws ClassNotFoundException, IOException {
         ObjectInputStream is = new ObjectInputStream(new FileInputStream("brigades.bin"));
         List<Object> input = (List<Object>) is.readObject();
-        List<Object> checkList = new ArrayList<>();
         for (Object l : input) {
-            checkList.add(l.getClass().getSimpleName());
             if (l instanceof Brigade) {
                 Brigade app = (Brigade) l;
                 brigades.add(app);
