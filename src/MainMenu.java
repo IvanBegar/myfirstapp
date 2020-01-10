@@ -3,7 +3,6 @@ import java.util.*;
 
 public class MainMenu {
 
-
     private static List<Brigade> brigades = new ArrayList<>();
     ServiceCompany serviceCompany = new ServiceCompany(brigades);
     boolean exit;
@@ -182,7 +181,7 @@ public class MainMenu {
 
                 break;
             case "Add":
-                Employee employee = employeeCreation(brigade);
+                Employee employee = employeeCreation();
                 brigade.addEmployee(employee);
                 break;
             case "Info":
@@ -210,34 +209,28 @@ public class MainMenu {
         System.out.println("4. 'Back' - Back to main menu");
     }
 
-        private Employee employeeCreation(Brigade brigade) {
+        private Employee employeeCreation() {
             Employee employee = new Employee();
-            int numberOfMasters = brigade.getOnlyOneMaster();
-            int numberOfDrillers = brigade.getOnlyTwoDrillers();
-            int numberOfMachinists = brigade.getOnlyOneMachinist();
-            int numberOfHelpers = brigade.getOnlyFourHelper();
 
             System.out.print("\nPlease set the position of employee (Master/Driller/Machinist/Helper): ");
             String positionOfEmployee = getCommandFromUser();
             if (positionOfEmployee.equals("Master") || positionOfEmployee.equals("Driller") ||
                     positionOfEmployee.equals("Machinist") || positionOfEmployee.equals("Helper")){
-                if (numberOfDrillers < 2 || numberOfMasters == 0 || numberOfMachinists == 0 || numberOfHelpers < 4) {
                     employee.setPosition(positionOfEmployee);
                 } else {
-                    System.out.println("Can`t be added another employee of that position.");
-                    employeeCreation(brigade);
-                }
-            } else {
                 System.out.println("\nWrong type. Try again.");
-                employeeCreation(brigade);
+                employeeCreation();
             }
 
-            System.out.println("Please set the name of employee: ");
-            employee.setName(getCommandFromUser());
+            if (employee.getPosition() == null) {
+                employeeCreation();
+            } else {
+                System.out.println("Please set the name of employee: ");
+                employee.setName(getCommandFromUser());
 
-            System.out.println("Please set the age of employee: ");
-            employee.setAge(getPositiveNumberFromUser());
-
+                System.out.println("Please set the age of employee: ");
+                employee.setAge(getPositiveNumberFromUser());
+            }
             return employee;
     }
 
@@ -256,9 +249,9 @@ public class MainMenu {
 }
 
         private void doYouWantToManageBrigade () throws IOException {
-        System.out.println("\nDo you want manage brigade? (Yes/No)");
+        System.out.println("\nDo you want manage brigade? (Manage/Back)");
         String yesOrNO = getCommandFromUser();
-        if (yesOrNO.equals("Yes")) {
+        if (yesOrNO.equals("Manage")) {
             System.out.println("What brigade you want manage?");
             int brigadeIndex = getIndexOfBrigade();
             Brigade brigade = brigades.get(brigadeIndex);
@@ -266,7 +259,7 @@ public class MainMenu {
                 printAvailableCommandsForBrigades();
                 brigadeManagement(brigade);
             }
-        } else if (yesOrNO.equals("No")){
+        } else if (yesOrNO.equals("Back")){
             System.out.println("");
             System.out.println("\nYou returned to main menu.");
         } else {

@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -13,10 +12,6 @@ public class Brigade implements Serializable {
     private int brigadeNumber;
     private String typeOfPA;
     private String typeOfBrigade;
-    private int onlyOneMaster = 0;
-    private int onlyTwoDrillers = 0;
-    private int onlyOneMachinist = 0;
-    private int onlyFourHelper = 0;
 
     public Brigade(List<Employee> employees) {
         this.employees = employees;
@@ -26,36 +21,16 @@ public class Brigade implements Serializable {
         return employees;
     }
 
-    public int getOnlyOneMaster() {
-        return onlyOneMaster;
-    }
-
-    public int getOnlyTwoDrillers() {
-        return onlyTwoDrillers;
-    }
-
-    public int getOnlyOneMachinist() {
-        return onlyOneMachinist;
-    }
-
-    public int getOnlyFourHelper() {
-        return onlyFourHelper;
-    }
-
     public void addEmployee(Employee employee) {
         String position = employee.getPosition();
         if (position.equals("Master")) {
                 this.employees.add(employee);
-                this.onlyOneMaster++;
         } else if (position.equals("Machinist")) {
                 this.employees.add(employee);
-                this.onlyOneMachinist++;
         } else if (position.equals("Driller")) {
                 this.employees.add(employee);
-                this.onlyTwoDrillers++;
         } else if (position.equals("Helper")) {
                 this.employees.add(employee);
-                this.onlyFourHelper++;
         }
     }
 

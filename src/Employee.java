@@ -7,6 +7,10 @@ public class Employee implements Serializable {
     private String position;
     private int age;
     private double salary;
+    private static int onlyOneMaster = 0;
+    private static int onlyTwoDrillers = 0;
+    private static int onlyOneMachinist = 0;
+    private static int onlyFourHelper = 0;
 
     public int getAge() {
         return age;
@@ -29,23 +33,27 @@ public class Employee implements Serializable {
     }
 
     public void setPosition(String position) {
-        if (position.equals("Master")) {
-            this.position = position;
-            this.salary = 50000;
-        } else if (position.equals("Machinist")) {
-            this.position = position;
-            this.salary = 20000;
-        } else if (position.equals("Driller")) {
-            this.position = position;
-            this.salary = 35000;
-        } else if (position.equals("Helper")) {
-            this.position = position;
-            this.salary = 20000;
-        } else {
-            this.position = position;
+            if (position.equals("Master")) {
+                if (onlyOneMaster == 0) {
+                    this.position = position;
+                    this.salary = 50000;
+                    onlyOneMaster++;
+                } else {
+                    System.out.println("Brigade already have a master. Try to add another employee.");
+                }
+            } else if (position.equals("Machinist")) {
+                this.position = position;
+                this.salary = 20000;
+            } else if (position.equals("Driller")) {
+                this.position = position;
+                this.salary = 35000;
+            } else if (position.equals("Helper")) {
+                this.position = position;
+                this.salary = 20000;
+            } else {
+                this.position = position;
+            }
         }
-    }
-
     @Override
     public String toString() {
         return "Employee " + name  + ", position: " + position + ", age: "+ age + ", salary: " + salary;
