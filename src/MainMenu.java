@@ -1,4 +1,3 @@
-import javax.print.DocFlavor;
 import java.io.*;
 import java.util.*;
 
@@ -8,6 +7,7 @@ public class MainMenu {
     private static List<Brigade> brigades = new ArrayList<>();
     ServiceCompany serviceCompany = new ServiceCompany(brigades);
     boolean exit;
+    boolean back;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         readFile();
@@ -41,14 +41,9 @@ public class MainMenu {
         public void performCommand(String command) throws IOException {
             switch (command) {
                 case "List":
-                    if (brigades.isEmpty()) {
-                        System.out.println("\nNo brigades exists.");
-                    }
-                    for (Brigade br : brigades) {
-                        System.out.print(br.toString());
-                    }
-                    System.out.println("");
-                    System.out.println("\nYou returned to main menu.");
+                    listOfBrigades();
+                    doYouWantToManageBrigade();
+
                     break;
                 case "Add":
                     Brigade newBrigade = brigadeCreation();
@@ -59,13 +54,13 @@ public class MainMenu {
                     if (brigades.isEmpty()) {
                     System.out.println("\nNo brigades exists.");
                 } else {
-                        int i = 1;
-                        for (Iterator<Brigade> it = brigades.iterator(); it.hasNext(); i++) {
+                        int y = 1;
+                        for (Iterator<Brigade> it = brigades.iterator(); it.hasNext(); y++) {
                             Brigade s = it.next();
-                            System.out.println("'"+i+"'" + ". " + s.getBrigadeNumber()+ " " + s.getTypeOfBrigade());
+                            System.out.println("'"+y+"'" + ". " + s.getBrigadeNumber()+ " " + s.getTypeOfBrigade());
                         }
                         System.out.print("\nWhat brigade you want to remove: ");
-                        brigades.remove(getIndexForRemoveBrigade());
+                        brigades.remove(getIndexOfBrigade());
                     }
                     System.out.println("You returned to main menu.");
                     break;
@@ -87,7 +82,7 @@ public class MainMenu {
             return command;
         }
 
-        public int getBrigadeNumberFromUser() {
+        public int getPositiveNumberFromUser() {
         Scanner sc = new Scanner(System.in);
             int num;
             while (true)
@@ -104,7 +99,7 @@ public class MainMenu {
             return num;
     }
 
-        public int getIndexForRemoveBrigade() {
+        public int getIndexOfBrigade() {
             Scanner sc = new Scanner(System.in);
             int num;
             while (true)
@@ -122,7 +117,9 @@ public class MainMenu {
     }
 
         public Brigade brigadeCreation(){
-            Brigade newBrigade = new Brigade();
+            List<Employee> employees = new ArrayList<>();
+            Brigade newBrigade = new Brigade(employees);
+
 
             System.out.print("\nPlease set type of brigade (PRS/KRS): ");
             String typeOfBrigadeFromUser = getCommandFromUser();
@@ -134,12 +131,8 @@ public class MainMenu {
             }
 
             System.out.print("\nPlease set brigade number: ");
-            int brigadeNumberFromUser = getBrigadeNumberFromUser();
+            int brigadeNumberFromUser = getPositiveNumberFromUser();
             newBrigade.setBrigadeNumber(brigadeNumberFromUser);
-
-            System.out.print("\nPlease set name of brigade's master: ");
-            String mastersNameFromUser = getCommandFromUser();
-            newBrigade.setNameOfBrigadeMaster(mastersNameFromUser);
 
             System.out.print("\nYou create new brigade successfully: ");
             System.out.println(newBrigade.toString());
@@ -168,13 +161,117 @@ public class MainMenu {
     }
 
         public static void readFile() throws ClassNotFoundException, IOException {
-        ObjectInputStream is = new ObjectInputStream(new FileInputStream("brigades.bin"));
-        List<Object> input = (List<Object>) is.readObject();
-        for (Object l : input) {
-            if (l instanceof Brigade) {
-                Brigade app = (Brigade) l;
-                brigades.add(app);
+            try {
+                ObjectInputStream is = new ObjectInputStream(new FileInputStream("brigades.bin"));
+                List<Object> input = (List<Object>) is.readObject();
+                for (Object l : input) {
+                    if (l instanceof Brigade) {
+                        Brigade app = (Brigade) l;
+                        brigades.add(app);
+                    }
+                }
+            } catch (EOFException e) {
+                e.printStackTrace();
             }
+    }
+
+        public void brigadeManagement(Brigade brigade) throws IOException {
+            String command = getCommandFromUser();
+                switch (command) {
+            case "Edit":
+
+                break;
+            case "Add":
+                Employee employee = employeeCreation(brigade);
+                brigade.addEmployee(employee);
+                break;
+            case "Info":
+                List<Employee> employees = brigade.getEmployees();
+                System.out.println(brigade.toString());
+                System.out.println("Employees of brigade: ");
+                for (Employee employee1 : employees) {
+                    System.out.println(employee1.toString());
+                }
+                break;
+            case "Back":
+                back = true;
+                break;
+            default:
+                System.out.println("\nWrong command! Try again");
+                break;
+                }
+            }
+
+        private void printAvailableCommandsForBrigades () {
+        System.out.println("\nAvailable command's: ");
+        System.out.println("1. 'Edit' - Edit information to brigade");
+        System.out.println("2. 'Add' - Add a new employee to the brigade");
+        System.out.println("3. 'Info' - Show's info about brigade");
+        System.out.println("4. 'Back' - Back to main menu");
+    }
+
+        private Employee employeeCreation(Brigade brigade) {
+            Employee employee = new Employee();
+            int numberOfMasters = brigade.getOnlyOneMaster();
+            int numberOfDrillers = brigade.getOnlyTwoDrillers();
+            int numberOfMachinists = brigade.getOnlyOneMachinist();
+            int numberOfHelpers = brigade.getOnlyFourHelper();
+
+            System.out.print("\nPlease set the position of employee (Master/Driller/Machinist/Helper): ");
+            String positionOfEmployee = getCommandFromUser();
+            if (positionOfEmployee.equals("Master") || positionOfEmployee.equals("Driller") ||
+                    positionOfEmployee.equals("Machinist") || positionOfEmployee.equals("Helper")){
+                if (numberOfDrillers < 2 || numberOfMasters == 0 || numberOfMachinists == 0 || numberOfHelpers < 4) {
+                    employee.setPosition(positionOfEmployee);
+                } else {
+                    System.out.println("Can`t be added another employee of that position.");
+                    employeeCreation(brigade);
+                }
+            } else {
+                System.out.println("\nWrong type. Try again.");
+                employeeCreation(brigade);
+            }
+
+            System.out.println("Please set the name of employee: ");
+            employee.setName(getCommandFromUser());
+
+            System.out.println("Please set the age of employee: ");
+            employee.setAge(getPositiveNumberFromUser());
+
+            return employee;
+    }
+
+        private void listOfBrigades() throws IOException {
+        if (brigades.isEmpty()) {
+            System.out.println("\nNo brigades exists.");
+        } else {
+            int i = 1;
+            for (Iterator<Brigade> it = brigades.iterator(); it.hasNext(); i++) {
+                Brigade s = it.next();
+                System.out.println("'"+i+"'" + ". " + s.toString());
+            }
+    }
+
+
+}
+
+        private void doYouWantToManageBrigade () throws IOException {
+        System.out.println("\nDo you want manage brigade? (Yes/No)");
+        String yesOrNO = getCommandFromUser();
+        if (yesOrNO.equals("Yes")) {
+            System.out.println("What brigade you want manage?");
+            int brigadeIndex = getIndexOfBrigade();
+            Brigade brigade = brigades.get(brigadeIndex);
+            while (!back){
+                printAvailableCommandsForBrigades();
+                brigadeManagement(brigade);
+            }
+        } else if (yesOrNO.equals("No")){
+            System.out.println("");
+            System.out.println("\nYou returned to main menu.");
+        } else {
+            System.out.println("Wrong command. Try again");
+            doYouWantToManageBrigade();
         }
     }
 }

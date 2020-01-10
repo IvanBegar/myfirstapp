@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -7,11 +9,55 @@ import java.util.Objects;
 
 public class Brigade implements Serializable {
 
+    private List<Employee> employees;
     private int brigadeNumber;
-    private String nameOfBrigadeMaster;
     private String typeOfPA;
-
     private String typeOfBrigade;
+    private int onlyOneMaster = 0;
+    private int onlyTwoDrillers = 0;
+    private int onlyOneMachinist = 0;
+    private int onlyFourHelper = 0;
+
+    public Brigade(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public int getOnlyOneMaster() {
+        return onlyOneMaster;
+    }
+
+    public int getOnlyTwoDrillers() {
+        return onlyTwoDrillers;
+    }
+
+    public int getOnlyOneMachinist() {
+        return onlyOneMachinist;
+    }
+
+    public int getOnlyFourHelper() {
+        return onlyFourHelper;
+    }
+
+    public void addEmployee(Employee employee) {
+        String position = employee.getPosition();
+        if (position.equals("Master")) {
+                this.employees.add(employee);
+                this.onlyOneMaster++;
+        } else if (position.equals("Machinist")) {
+                this.employees.add(employee);
+                this.onlyOneMachinist++;
+        } else if (position.equals("Driller")) {
+                this.employees.add(employee);
+                this.onlyTwoDrillers++;
+        } else if (position.equals("Helper")) {
+                this.employees.add(employee);
+                this.onlyFourHelper++;
+        }
+    }
 
     public void setTypeOfBrigade(String typeOfBrigade) {
         if (typeOfBrigade.equals("PRS")) {
@@ -23,14 +69,6 @@ public class Brigade implements Serializable {
         } else {
             this.typeOfBrigade = typeOfBrigade;
         }
-    }
-
-    public void setNameOfBrigadeMaster(String nameOfBrigadeMaster) {
-        this.nameOfBrigadeMaster = nameOfBrigadeMaster;
-    }
-
-    public String getNameOfBrigadeMaster() {
-        return nameOfBrigadeMaster;
     }
 
     public void setBrigadeNumber(int brigadeNumber) {
@@ -51,10 +89,9 @@ public class Brigade implements Serializable {
 
     @Override
     public String toString() {
-        return "\nBrigade №'" + brigadeNumber + '\'' +
-                ", name of brigade master = '" + nameOfBrigadeMaster + '\'' +
-                ", type of PA = '" + typeOfPA + '\'' +
-                ", type of brigade = '" + typeOfBrigade;
+        return "Brigade №'" + brigadeNumber +
+                "', type of PA: '" + typeOfPA  +
+                "', type of brigade: '" + typeOfBrigade + "'";
     }
 
     @Override
@@ -63,14 +100,13 @@ public class Brigade implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Brigade brigade = (Brigade) o;
         return brigadeNumber == brigade.brigadeNumber &&
-                nameOfBrigadeMaster.equals(brigade.nameOfBrigadeMaster) &&
                 typeOfPA.equals(brigade.typeOfPA) &&
                 typeOfBrigade.equals(brigade.typeOfBrigade);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brigadeNumber, nameOfBrigadeMaster, typeOfPA, typeOfBrigade);
+        return Objects.hash(brigadeNumber, typeOfPA, typeOfBrigade);
     }
 }
 
