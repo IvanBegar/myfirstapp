@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Ivan Begar
  */
 
-public class Brigade {
+public class Brigade implements Serializable {
 
     private int brigadeNumber;
     private String nameOfBrigadeMaster;
@@ -53,7 +54,7 @@ public class Brigade {
         return "\nBrigade №'" + brigadeNumber + '\'' +
                 ", name of brigade master = '" + nameOfBrigadeMaster + '\'' +
                 ", type of PA = '" + typeOfPA + '\'' +
-                ", type of brigade = '" + typeOfBrigade + '\'';
+                ", type of brigade = '" + typeOfBrigade;
     }
 
     @Override

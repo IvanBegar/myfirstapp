@@ -1,20 +1,21 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import javax.print.DocFlavor;
+import java.io.*;
+import java.util.*;
 
 public class MainMenu {
+
 
     private static List<Brigade> brigades = new ArrayList<>();
     ServiceCompany serviceCompany = new ServiceCompany(brigades);
     boolean exit;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        readFile();
         MainMenu mainMenu = new MainMenu();
         mainMenu.runMain();
     }
 
-        public void runMain() {
+        public void runMain() throws IOException {
         printHeadOfMenu();
         while (!exit) {
             printAvailableCommands();
@@ -37,16 +38,17 @@ public class MainMenu {
         System.out.println("4. 'Exit' - Close the program");
     }
 
-        public void performCommand(String command){
+        public void performCommand(String command) throws IOException {
             switch (command) {
                 case "List":
                     if (brigades.isEmpty()) {
                         System.out.println("\nNo brigades exists.");
                     }
                     for (Brigade br : brigades) {
-                        System.out.println(br.toString());
+                        System.out.print(br.toString());
                     }
-                    System.out.println("You returned to main menu.");
+                    System.out.println("");
+                    System.out.println("\nYou returned to main menu.");
                     break;
                 case "Add":
                     Brigade newBrigade = brigadeCreation();
@@ -69,6 +71,7 @@ public class MainMenu {
                     break;
                 case "Exit":
                     exit = true;
+                    saveBrigadesToTheFile();
                     System.out.println("Thank you for using our app.");
                     break;
                 default:
@@ -107,7 +110,7 @@ public class MainMenu {
             while (true)
                 try {
                     num = Integer.parseInt(sc.nextLine());
-                    if (num < 0 || num >= brigades.size()) {
+                    if (num < 0 || num > brigades.size()) {
                         System.out.print("Only number from the list: ");
                         continue;
                     }
@@ -143,4 +146,37 @@ public class MainMenu {
 
             return newBrigade;
         }
+
+        public void saveBrigadesToTheFile() {
+            System.out.println("\nDo you want save changes?");
+            String command = getCommandFromUser();
+            if (command.equals("Yes")) {
+                try (FileOutputStream fous = new FileOutputStream("brigades.bin")) {
+                    ObjectOutputStream oos = new ObjectOutputStream(fous);
+                    oos.writeObject(brigades);
+                    System.out.println("\nChanges saved.");
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (command.equals("No")){
+                System.out.println("\nChanges not saved.");
+            } else {
+                System.out.println("Wrong command. Try again.");
+                saveBrigadesToTheFile();
+            }
+    }
+
+        public static void readFile() throws ClassNotFoundException, IOException {
+        ObjectInputStream is = new ObjectInputStream(new FileInputStream("brigades.bin"));
+        List<Object> input = (List<Object>) is.readObject();
+        List<Object> checkList = new ArrayList<>();
+        for (Object l : input) {
+            checkList.add(l.getClass().getSimpleName());
+            if (l instanceof Brigade) {
+                Brigade app = (Brigade) l;
+                brigades.add(app);
+            }
+        }
+    }
 }
