@@ -12,16 +12,8 @@ public class Employee implements Serializable {
     private static int onlyOneMachinist = 0;
     private static int onlyFourHelper = 0;
 
-    public int getAge() {
-        return age;
-    }
-
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
@@ -69,6 +61,7 @@ public class Employee implements Serializable {
                 this.position = position;
             }
         }
+
     @Override
     public String toString() {
         return "Employee " + name  + ", position: " + position + ", age: "+ age + ", salary: " + salary;

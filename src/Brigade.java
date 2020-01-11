@@ -12,6 +12,10 @@ public class Brigade implements Serializable {
     private int brigadeNumber;
     private String typeOfPA;
     private String typeOfBrigade;
+    private int onlyOneMaster = 0;
+    private int onlyTwoDrillers = 0;
+    private int onlyOneMachinist = 0;
+    private int onlyFourHelper = 0;
 
     public Brigade(List<Employee> employees) {
         this.employees = employees;
@@ -24,13 +28,35 @@ public class Brigade implements Serializable {
     public void addEmployee(Employee employee) {
         String position = employee.getPosition();
         if (position.equals("Master")) {
+            if (onlyOneMaster == 0) {
                 this.employees.add(employee);
+                onlyOneMaster++;
+            } else {
+            System.out.println("Brigade already have a master.");
+            }
         } else if (position.equals("Machinist")) {
+            if (onlyOneMachinist == 0) {
                 this.employees.add(employee);
+                onlyOneMachinist++;
+            } else {
+                System.out.println("Brigade already have a machinist.");
+            }
         } else if (position.equals("Driller")) {
+            if (onlyTwoDrillers < 2) {
                 this.employees.add(employee);
+                onlyTwoDrillers++;
+            } else {
+                System.out.println("Brigade already have two drillers`s.");
+            }
         } else if (position.equals("Helper")) {
+            if (onlyFourHelper < 4) {
                 this.employees.add(employee);
+                onlyFourHelper++;
+            } else {
+                System.out.println("Brigade already have four helper`s.");
+            }
+        } else {
+            System.out.println("\nTry again.");
         }
     }
 
@@ -52,10 +78,6 @@ public class Brigade implements Serializable {
 
     public int getBrigadeNumber() {
         return brigadeNumber;
-    }
-
-    public String getTypeOfPA() {
-        return typeOfPA;
     }
 
     public String getTypeOfBrigade() {

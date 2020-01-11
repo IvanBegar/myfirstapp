@@ -108,8 +108,10 @@ public class MainMenu {
                     availableCommandsForEmployeeManage();
                     employeeManagement(brigade);
                 }
+                back2 = false;
                 break;
             case 3:
+                System.out.println();
                 System.out.println(brigade.toString());
                 listOfEmployee(brigade);
                 break;
@@ -127,13 +129,16 @@ public class MainMenu {
             switch (command) {
                 case 1:
                     Employee employee = employeeCreation();
-                    brigade.addEmployee(employee);
+                    if (employee != null) {
+                        brigade.addEmployee(employee);
+                    }
                     break;
                 case 2:
                     employeeRemove(brigade);
                     break;
                 case 3:
-
+                    Brigade brigade1 = finalBrigadeForEmployee();
+                    employeeTransfer(brigade, brigade1);
                     break;
                 case 4:
                     back2 = true;
@@ -164,7 +169,7 @@ public class MainMenu {
             System.out.println("\nAvailable commands: ");
             System.out.println("'1'. Add a new employee to the brigade.");
             System.out.println("'2'. Remove an employee from brigade.");
-            System.out.println("'3'. Transfer employee from one brigade to another.");
+            System.out.println("'3'. Transfer employee from this brigade to another.");
             System.out.println("'4'. Back to brigade manage menu.");
     }
 
@@ -197,7 +202,7 @@ public class MainMenu {
             Employee employee = employeeWithPosition();
 
             if (employee.getPosition() == null) {
-                employeeCreation();
+                return null;
             } else {
                 System.out.println("\nPlease set the name of employee: ");
                 employee.setName(getCommandFromUser());
@@ -213,9 +218,9 @@ public class MainMenu {
         Brigade newBrigade = new Brigade(employees);
 
 
-        System.out.print("\nPlease set type of brigade: ");
-        System.out.print("'1'. Create PRS brigade.");
-        System.out.print("'2'. Create KRS brigade.");
+        System.out.println("\nPlease set type of brigade: ");
+        System.out.println("'1'. Create PRS brigade.");
+        System.out.println("'2'. Create KRS brigade.");
         int typeOfBrigadeFromUser = getPositiveNumberFromUser();
         if (typeOfBrigadeFromUser == 1) {
             newBrigade.setTypeOfBrigade("PRS");
@@ -294,6 +299,7 @@ public class MainMenu {
             System.out.println("\nNo brigades exists.");
         } else {
             int i = 1;
+            System.out.println();
             for (Iterator<Brigade> it = brigades.iterator(); it.hasNext(); i++) {
                 Brigade s = it.next();
                 System.out.println("'"+i+"'" + ". " + s.toString());
@@ -328,11 +334,12 @@ public class MainMenu {
                 availableCommandsForBrigadeManage();
                 brigadeManagement(brigade);
             }
+            back = false;
         } else if (oneOrTwo == 2){
             System.out.println();
             System.out.println("\nYou returned to main menu.");
         } else {
-            System.out.println("Wrong command. Try again.");
+            System.out.println("\nWrong command. Try again.");
             doYouWantToManageBrigade();
         }
     }
@@ -372,5 +379,40 @@ public class MainMenu {
         } catch (EOFException e) {
             e.printStackTrace();
         }
+    }
+
+        private void employeeTransfer(Brigade brigade1, Brigade brigade2) {
+            if (brigade1.equals(brigade2)) {
+                System.out.println("\nIt`s a same brigade. Try again.");
+            } else {
+                List<Employee> employees1 = brigade1.getEmployees();
+                List<Employee> employees2 = brigade2.getEmployees();
+                if (employees1.isEmpty()) {
+                    System.out.println("\nBrigade have not employee`s.");
+                } else {
+                    int y = 1;
+                    for (Iterator<Employee> it = employees1.iterator(); it.hasNext(); y++) {
+                        Employee s = it.next();
+                        System.out.println("\nEmployee`s: ");
+                        System.out.println("'"+y+"'" + ". " + s.toString());
+                    }
+                    System.out.print("\nWhat employee you want to transfer: ");
+                    Employee employee = employees1.get(getIndexForRemove());
+                    brigade2.addEmployee(employee);
+                    if (employees2.contains(employee)) {
+                        employees1.remove(employee);
+                    } else {
+                        System.out.println("Try again.");
+                    }
+                }
+            }
+    }
+
+        private Brigade finalBrigadeForEmployee () {
+            System.out.println("\nTo which brigade you want transfer employee?");
+            listOfBrigades();
+            System.out.print("\nEnter here: ");
+            int brigadeIndex = getIndexForRemove();
+            return brigades.get(brigadeIndex);
     }
 }
