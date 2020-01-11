@@ -75,7 +75,6 @@ public class MainMenu {
                 case 1:
                     listOfBrigades();
                     doYouWantToManageBrigade();
-                    System.out.println("You returned to main menu.");
                     break;
                 case 2:
                     Brigade newBrigade = brigadeCreation();
@@ -336,7 +335,6 @@ public class MainMenu {
             }
             back = false;
         } else if (oneOrTwo == 2){
-            System.out.println();
             System.out.println("\nYou returned to main menu.");
         } else {
             System.out.println("\nWrong command. Try again.");
