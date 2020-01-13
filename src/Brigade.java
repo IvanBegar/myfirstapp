@@ -6,6 +6,9 @@ import java.util.Objects;
  * @author Ivan Begar
  */
 
+// TODO Validation Helper for brigade management
+// TODO Type of PA, brigade -> Enum
+
 public class Brigade implements Serializable {
 
     private List<Employee> employees;

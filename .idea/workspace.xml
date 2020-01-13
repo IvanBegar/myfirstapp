@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="648eb56a-9aec-4d1a-8ed1-ba7e5c1d366b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/brigades.bin" beforeDir="false" afterPath="$PROJECT_DIR$/brigades.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Brigade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Brigade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +125,9 @@
       <workItem from="1578243580779" duration="1459000" />
       <workItem from="1578559645565" duration="20058000" />
       <workItem from="1578647336087" duration="25696000" />
-      <workItem from="1578750220409" duration="8441000" />
+      <workItem from="1578750220409" duration="8601000" />
+      <workItem from="1578759126022" duration="211000" />
+      <workItem from="1578945615291" duration="3522000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1577532633513</created>
@@ -221,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578758465643</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Delete some trash code">
+      <created>1578758755663</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1578758755663</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,6 +265,7 @@
     <MESSAGE value="Add more functionality for brigade management" />
     <MESSAGE value="Add employee manage for brigade`s. Remove some trash code" />
     <MESSAGE value="Add transfer function. Fix some issues." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add transfer function. Fix some issues." />
+    <MESSAGE value="Delete some trash code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete some trash code" />
   </component>
 </project>

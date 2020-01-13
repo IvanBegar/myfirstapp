@@ -1,6 +1,8 @@
 import java.io.Serializable;
 import java.util.Objects;
 
+// TODO Make hierarhie for employee
+
 public class Employee implements Serializable {
 
     private String name;
